@@ -3,8 +3,10 @@ package com.guresberat.myrecyclerviewdemo
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
@@ -24,6 +26,8 @@ class BlogRecyclerAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         when(holder){
             is BlogViewHolder ->{
                 holder.bind(items[position])
+                holder.cardView.animation =
+                    AnimationUtils.loadAnimation(holder.itemView.context, R.anim.slide_in)
             }
         }
     }
@@ -42,6 +46,7 @@ class BlogRecyclerAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         val blogImage = itemView.findViewById<ImageView>(R.id.blog_image)
         val blogTitle = itemView.findViewById<TextView>(R.id.blog_title)
         val blogAuthor = itemView.findViewById<TextView>(R.id.blog_author)
+        val cardView = itemView.findViewById<CardView>(R.id.card_view)
 
         fun bind(blogPost: BlogPost) {
             blogTitle.text = blogPost.title
